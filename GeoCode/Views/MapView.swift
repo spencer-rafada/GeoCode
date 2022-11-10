@@ -10,6 +10,7 @@ import MapKit
 
 struct MapView: View {
     @EnvironmentObject private var mv: MapViewModel
+    @State private var isCountry: Bool = false
     
     var body: some View {
         if mv.isFetching {
@@ -22,8 +23,14 @@ struct MapView: View {
             
         }
         ZStack {
-            mapLayer
-            .ignoresSafeArea()
+            if isCountry {
+                mapCountryLayer
+                    .ignoresSafeArea()
+            } else {
+                mapFlightsLayer
+                    .ignoresSafeArea()
+            }
+            
             
             VStack (spacing: 0) {
                 Spacer()
@@ -38,8 +45,10 @@ struct MapView: View {
             CountryDetailView(country: country)
         }
         .task {
-            await mv.fetchData()
+            await mv.fetchCountryData()
+            await mv.fetchFlightsData()
             mv.transferData()
+            mv.transferFlightsData()
         }
     }
 }
@@ -52,7 +61,7 @@ struct MapView_Previews: PreviewProvider {
 }
 
 extension MapView {
-    private var mapLayer: some View {
+    private var mapCountryLayer: some View {
         Map(coordinateRegion: $mv.countryRegion, annotationItems: mv.countries, annotationContent: {country in
             MapAnnotation(coordinate: country.coordinates) {
                 CountryMapAnnotationView()
@@ -61,6 +70,16 @@ extension MapView {
                     .onTapGesture {
                         mv.showNextCountry(country: country)
                     }
+            }
+        })
+    }
+    
+    private var mapFlightsLayer: some View {
+        Map(coordinateRegion: $mv.flightRegion, annotationItems: mv.flights, annotationContent: {flight in
+            MapAnnotation(coordinate: flight.coordinates) {
+                FlightsMapAnnotationView()
+                    .scaleEffect(0.5)
+                    .shadow(radius: 10)
             }
         })
     }
