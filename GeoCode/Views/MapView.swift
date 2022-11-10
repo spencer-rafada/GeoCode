@@ -6,22 +6,16 @@
 //
 
 import SwiftUI
+import MapKit
 
 struct MapView: View {
     @EnvironmentObject private var vm: CountryViewModel
     var body: some View {
         List {
-            ForEach(vm.allCountries, id:\.name?.common) {country in
-                Text(country.name?.common ?? "None")
-                    .font(.subheadline)
-                    .fontWeight(.bold)
-                Text(country.capital?[0] ?? "No capital listed")
-                    .font(.subheadline)
-                    .foregroundColor(.gray)
-                Text("Lat: \(country.latlng?[0] ?? 0), Long: \(country.latlng?[1] ?? 0)")
+            ForEach(vm.countries) { country in
+                Text(country.name)
             }
         }
-        .padding()
     }
 }
 

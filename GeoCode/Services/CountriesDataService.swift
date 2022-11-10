@@ -34,7 +34,7 @@ class CountriesDataService {
         // 1. create the publisher
         countrySubscription = URLSession.shared.dataTaskPublisher(for: url)
         // 2. subscribe the publisher on background thread <- increases performance
-            .subscribe(on: DispatchQueue.global(qos: .default))
+            .subscribe(on: DispatchQueue.global(qos: .background))
         // 3. receive on main thread
             .receive(on: DispatchQueue.main)
         // 4. tryMap (check that the data is good)
@@ -53,7 +53,6 @@ class CountriesDataService {
                 print("COMPLETION: \(completion)")
             } receiveValue: { [weak self] (returnedCountries) in
                 self?.allCountries = returnedCountries
-                print("Countries: \(returnedCountries)")
             }
         // 7. store (cancel subscription if needed)
 //            .store(in: &cancellables)
