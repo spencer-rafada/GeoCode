@@ -24,7 +24,7 @@ class MapViewModel: ObservableObject {
     
     // Current region on the map
     @Published var countryRegion: MKCoordinateRegion = MKCoordinateRegion()
-    let countrySpan = MKCoordinateSpan(latitudeDelta: 0.01, longitudeDelta: 0.01)
+    let countrySpan = MKCoordinateSpan(latitudeDelta: 0.07, longitudeDelta: 0.07)
     
     // Show the details via sheet
     @Published var sheetCountry: Country? = nil
