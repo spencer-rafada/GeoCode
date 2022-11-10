@@ -108,7 +108,7 @@ extension CountryPreviewView{
         Button {
             mv.prevButtonPressed()
         } label: {
-            Text("Next")
+            Text("Prev")
                 .font(.headline)
                 .frame(width: 65, height: 30)
         }
