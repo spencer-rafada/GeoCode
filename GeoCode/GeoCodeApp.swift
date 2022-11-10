@@ -9,11 +9,12 @@ import SwiftUI
 
 @main
 struct GeoCodeApp: App {
-    @State private var vm = CountryViewModel()
+    @State private var mv = MapViewModel()
+    
     var body: some Scene {
         WindowGroup {
             MapView()
-                .environmentObject(vm)
+                .environmentObject(mv)
         }
     }
 }

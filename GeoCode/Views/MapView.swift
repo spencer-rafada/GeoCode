@@ -9,12 +9,34 @@ import SwiftUI
 import MapKit
 
 struct MapView: View {
-    @EnvironmentObject private var vm: CountryViewModel
+    @EnvironmentObject private var mv: MapViewModel
+    
     var body: some View {
-        List {
-            ForEach(vm.countries) { country in
-                Text(country.name)
+        if mv.isFetching {
+            VStack {
+                Spacer()
+                Text("Fetching Data...")
+                ProgressView()
+                Spacer()
             }
+            
+        }
+        ZStack {
+            mapLayer
+            .ignoresSafeArea()
+            
+            VStack (spacing: 0) {
+                Spacer()
+                countriesPreview
+                    .shadow(color: Color.black.opacity(0.3), radius: 20)
+                    .padding()
+                    .transition(.asymmetric(insertion: .move(edge: .trailing), removal: .move(edge: .leading)))
+            }
+
+        }
+        .task {
+            await mv.fetchData()
+            mv.transferData()
         }
     }
 }
@@ -22,6 +44,36 @@ struct MapView: View {
 struct MapView_Previews: PreviewProvider {
     static var previews: some View {
         MapView()
-            .environmentObject(CountryViewModel())
+            .environmentObject(MapViewModel())
     }
+}
+
+extension MapView {
+    private var mapLayer: some View {
+        Map(coordinateRegion: $mv.countryRegion, annotationItems: mv.countries, annotationContent: {country in
+            MapAnnotation(coordinate: country.coordinates) {
+                CountryMapAnnotationView()
+                    .scaleEffect(mv.countryLoc == country ? 1 : 0.6)
+                    .shadow(radius: 10)
+                    .onTapGesture {
+                        mv.showNextCountry(country: country)
+                    }
+            }
+        })
+    }
+    
+    private var countriesPreview: some View {
+            ZStack {
+                ForEach(mv.countries) { country in
+                    if mv.countryLoc == country {
+                        CountryPreviewView(country: country)
+                            .shadow(color: Color.black.opacity(0.3), radius: 20)
+                            .padding()
+                            .transition(.asymmetric(
+                                insertion: .move(edge: .trailing),
+                                removal: .move(edge: .leading)))
+                    }
+                }
+            }
+        }
 }

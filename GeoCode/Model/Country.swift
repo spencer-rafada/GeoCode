@@ -16,6 +16,8 @@ struct Country: Identifiable, Equatable {
     let unMember: Bool
     let region: String
     let population: Int
+    let capital: String
+    let flags: String
     // Include capital info next time
     // flags
     

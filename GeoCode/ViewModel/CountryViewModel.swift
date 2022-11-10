@@ -12,9 +12,7 @@ import SwiftUI
 
 class CountryViewModel: ObservableObject {
     // Initialize the array with an empty object to get around the init()
-    @Published var allCountries: [CountryModel] = []
     @Published var countries: [Country] = []
-    
     
     private let dataService = CountriesDataService()
     private var cancellables = Set<AnyCancellable>()
@@ -24,12 +22,6 @@ class CountryViewModel: ObservableObject {
     }
     
     func addCountries() {
-        dataService.$allCountries
-            .sink { [weak self] (returnedCountries) in
-                self?.allCountries = returnedCountries
-            }
-            .store(in: &cancellables)
-        
         dataService.$allCountries
             .map { (countryModel: [CountryModel]) -> [Country] in
                 var countries: [Country] = []
@@ -46,7 +38,9 @@ class CountryViewModel: ObservableObject {
                     let unMember = country.unMember ?? false
                     let region = country.region ?? "Somewhere"
                     let population = country.population ?? 0
-                    countries.append(Country(name: name, officialName: officialName, coordinates: coordinates, independent: independent, unMember: unMember, region: region, population: population))
+                    let capital = country.capital?[0] ?? "No capital"
+                    let flags = country.flags?.png ?? "No flags"
+                    countries.append(Country(name: name, officialName: officialName, coordinates: coordinates, independent: independent, unMember: unMember, region: region, population: population, capital: capital, flags: flags))
                 }
                 
                 return countries
