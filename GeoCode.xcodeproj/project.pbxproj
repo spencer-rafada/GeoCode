@@ -30,6 +30,7 @@
 		A0ABFFF6291D106F00E2E4C1 /* CountryMapAnnotationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CountryMapAnnotationView.swift; sourceTree = "<group>"; };
 		A0ABFFF8291D125900E2E4C1 /* CountryPreviewView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CountryPreviewView.swift; sourceTree = "<group>"; };
 		A0ABFFFA291D1E9800E2E4C1 /* CountryDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CountryDetailView.swift; sourceTree = "<group>"; };
+		A0ABFFFC291D28DD00E2E4C1 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		A0B2FC59291B101900AF0DDB /* GeoCode.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GeoCode.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A0B2FC5C291B101900AF0DDB /* GeoCodeApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeoCodeApp.swift; sourceTree = "<group>"; };
 		A0B2FC5E291B101900AF0DDB /* MapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapView.swift; sourceTree = "<group>"; };
@@ -88,6 +89,7 @@
 		A0B2FC50291B101900AF0DDB = {
 			isa = PBXGroup;
 			children = (
+				A0ABFFFC291D28DD00E2E4C1 /* README.md */,
 				A0B2FC5B291B101900AF0DDB /* GeoCode */,
 				A0B2FC5A291B101900AF0DDB /* Products */,
 			);
