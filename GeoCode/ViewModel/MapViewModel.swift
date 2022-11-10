@@ -18,6 +18,8 @@ class MapViewModel: ObservableObject {
     @Published var allFlights: [Datum] = []
     @Published var flights: [Flights] = []
     
+    @Published var isCountry: Bool = false
+    
     // Current location on the map
     @Published var countryLoc: Country {
         didSet {
@@ -190,5 +192,9 @@ class MapViewModel: ObservableObject {
             
             self.flights.append(Flights(aircraft: aircraft, arrival: arrival, departure: departure, flightNumber: flightNumber, coordinates: coordinates, flightStatus: flightStatus, altitude: altitude))
         }
+    }
+    
+    func toggleLayer() {
+        self.isCountry.toggle()
     }
 }

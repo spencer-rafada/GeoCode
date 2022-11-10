@@ -10,7 +10,6 @@ import MapKit
 
 struct MapView: View {
     @EnvironmentObject private var mv: MapViewModel
-    @State private var isCountry: Bool = false
     
     var body: some View {
         if mv.isFetching {
@@ -23,7 +22,7 @@ struct MapView: View {
             
         }
         ZStack {
-            if isCountry {
+            if mv.isCountry {
                 mapCountryLayer
                     .ignoresSafeArea()
             } else {
@@ -31,8 +30,12 @@ struct MapView: View {
                     .ignoresSafeArea()
             }
             
-            
             VStack (spacing: 0) {
+                Button {
+                    mv.toggleLayer()
+                } label: {
+                    Text(mv.isCountry ? "Flights" : "Countries")
+                }
                 Spacer()
                 countriesPreview
                     .shadow(color: Color.black.opacity(0.3), radius: 20)
