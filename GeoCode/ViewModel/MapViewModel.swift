@@ -132,4 +132,13 @@ class MapViewModel: ObservableObject {
         countryRegion = MKCoordinateRegion(center: countryLoc.capitalInfo, span: MKCoordinateSpan(latitudeDelta: 0.1, longitudeDelta: 0.1))
         
     }
+    
+    func refreshButtonPressed() {
+        guard let currentIndex = countries.firstIndex(where: {$0 == countryLoc}) else {
+            print("Could not find current index! This should never happen")
+            return
+        }
+        let currCountry = countries[currentIndex]
+        showNextCountry(country: currCountry)
+    }
 }

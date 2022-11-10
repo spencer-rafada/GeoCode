@@ -26,12 +26,15 @@ struct CountryPreviewView: View {
                 }
             }
         }
+        .overlay(refreshButton, alignment: .topTrailing)
         .padding(20)
         .background(
             RoundedRectangle(cornerRadius: 20)
                 .fill(.ultraThinMaterial)
                 .offset(y: 70))
         .cornerRadius(10)
+        
+        
     }
 }
 
@@ -110,5 +113,16 @@ extension CountryPreviewView{
                 .frame(width: 65, height: 30)
         }
         .buttonStyle(.bordered)
+    }
+    
+    private var refreshButton: some View {
+        Button {
+            mv.refreshButtonPressed()
+        } label: {
+            Image(systemName: "arrow.clockwise")
+                .font(.headline)
+                .frame(width: 30, height: 30)
+        }
+        .padding()
     }
 }
