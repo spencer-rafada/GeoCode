@@ -18,6 +18,7 @@ struct Country: Identifiable, Equatable {
     let population: Int
     let capital: String
     let flags: String
+    let capitalInfo: CLLocationCoordinate2D
     // Include capital info next time
     // flags
     

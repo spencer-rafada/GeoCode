@@ -40,7 +40,8 @@ class CountryViewModel: ObservableObject {
                     let population = country.population ?? 0
                     let capital = country.capital?[0] ?? "No capital"
                     let flags = country.flags?.png ?? "No flags"
-                    countries.append(Country(name: name, officialName: officialName, coordinates: coordinates, independent: independent, unMember: unMember, region: region, population: population, capital: capital, flags: flags))
+                    let capitalInfo = CLLocationCoordinate2D(latitude: country.capitalInfo?.latlng?[0] ?? 0, longitude: country.capitalInfo?.latlng?[1] ?? 0)
+                    countries.append(Country(name: name, officialName: officialName, coordinates: coordinates, independent: independent, unMember: unMember, region: region, population: population, capital: capital, flags: flags, capitalInfo: capitalInfo))
                 }
                 
                 return countries

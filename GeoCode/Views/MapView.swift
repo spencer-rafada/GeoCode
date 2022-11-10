@@ -34,6 +34,9 @@ struct MapView: View {
             }
 
         }
+        .sheet(item: $mv.sheetCountry, onDismiss: nil) { country in
+            CountryDetailView(country: country)
+        }
         .task {
             await mv.fetchData()
             mv.transferData()

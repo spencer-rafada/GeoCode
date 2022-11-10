@@ -26,8 +26,11 @@ class MapViewModel: ObservableObject {
     @Published var countryRegion: MKCoordinateRegion = MKCoordinateRegion()
     let countrySpan = MKCoordinateSpan(latitudeDelta: 0.01, longitudeDelta: 0.01)
     
+    // Show the details via sheet
+    @Published var sheetCountry: Country? = nil
+    
     init () {
-        let placeholder = Country(name: "Philippines", officialName: "Republic of the Philippines", coordinates: CLLocationCoordinate2D(latitude: 13, longitude: 122), independent: true, unMember: true, region: "Asia", population: 109581085, capital: "Manila", flags: "https://flagcdn.com/w320/ph.png")
+        let placeholder = Country(name: "Philippines", officialName: "Republic of the Philippines", coordinates: CLLocationCoordinate2D(latitude: 13, longitude: 122), independent: true, unMember: true, region: "Asia", population: 109581085, capital: "Manila", flags: "https://flagcdn.com/w320/ph.png", capitalInfo: CLLocationCoordinate2D(latitude: 14.6, longitude: 120.97))
         self.countryLoc = placeholder
         self.updateCountryRegion(country: placeholder)
     }
@@ -67,7 +70,8 @@ class MapViewModel: ObservableObject {
             let population = country.population ?? 0
             let capital = country.capital?[0] ?? "No capital"
             let flags = country.flags?.png ?? "No flag"
-            self.countries.append(Country(name: name, officialName: officialName, coordinates: coordinates, independent: independent, unMember: unMember, region: region, population: population, capital: capital, flags: flags))
+            let capitalInfo = CLLocationCoordinate2D(latitude: country.capitalInfo?.latlng?[0] ?? 0, longitude: country.capitalInfo?.latlng?[1] ?? 0)
+            self.countries.append(Country(name: name, officialName: officialName, coordinates: coordinates, independent: independent, unMember: unMember, region: region, population: population, capital: capital, flags: flags, capitalInfo: capitalInfo))
             print(countries)
         }
     }
@@ -121,5 +125,11 @@ class MapViewModel: ObservableObject {
         // If next index is valid
         let nextCountry = countries[nextIndex]
         showNextCountry(country: nextCountry)
+    }
+    
+    func goToCapital() {
+        sheetCountry = nil
+        countryRegion = MKCoordinateRegion(center: countryLoc.capitalInfo, span: MKCoordinateSpan(latitudeDelta: 0.1, longitudeDelta: 0.1))
+        
     }
 }

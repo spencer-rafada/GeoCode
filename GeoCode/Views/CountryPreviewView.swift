@@ -37,7 +37,7 @@ struct CountryPreviewView: View {
 
 struct CountryPreviewView_Previews: PreviewProvider {
     static var previews: some View {
-        CountryPreviewView(country: Country(name: "Mauritania", officialName: "Islamic Republic of Mauritania", coordinates: CLLocationCoordinate2D(latitude: 20, longitude: -12), independent: true, unMember: true, region: "Africa", population: 4649660, capital: "Nouakchott", flags: "https://flagcdn.com/w320/aw.png"))
+        CountryPreviewView(country: Country(name: "Mauritania", officialName: "Islamic Republic of Mauritania", coordinates: CLLocationCoordinate2D(latitude: 20, longitude: -12), independent: true, unMember: true, region: "Africa", population: 4649660, capital: "Nouakchott", flags: "https://flagcdn.com/w320/aw.png", capitalInfo: CLLocationCoordinate2D(latitude: 14.6, longitude: 120.97)))
             .environmentObject(CountryViewModel())
     }
 }
@@ -81,7 +81,7 @@ extension CountryPreviewView{
     
     private var details: some View {
         Button {
-            
+            mv.sheetCountry = country
         } label: {
             Text("Details")
                 .font(.headline)
