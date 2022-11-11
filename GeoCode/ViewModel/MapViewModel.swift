@@ -15,7 +15,7 @@ class MapViewModel: ObservableObject {
     @Published var errorMessage = ""
     @Published var countries: [Country] = []
     
-    @Published var searchText: String = ""
+//    @Published var searchText: String = ""
     
     // Current location on the map
     @Published var countryLoc: Country {
@@ -26,7 +26,7 @@ class MapViewModel: ObservableObject {
     
     // Current region on the map
     @Published var countryRegion: MKCoordinateRegion = MKCoordinateRegion()
-    let countrySpan = MKCoordinateSpan(latitudeDelta: 0.07, longitudeDelta: 0.07)
+    let countrySpan = MKCoordinateSpan(latitudeDelta: 1.4, longitudeDelta: 1.4)
     
     // Show the details via sheet
     @Published var sheetCountry: Country? = nil
