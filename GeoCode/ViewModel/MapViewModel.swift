@@ -15,6 +15,8 @@ class MapViewModel: ObservableObject {
     @Published var errorMessage = ""
     @Published var countries: [Country] = []
     
+    @Published var searchText: String = ""
+    
     // Current location on the map
     @Published var countryLoc: Country {
         didSet {
@@ -141,4 +143,10 @@ class MapViewModel: ObservableObject {
         let currCountry = countries[currentIndex]
         showNextCountry(country: currCountry)
     }
+    
+//    func searchCountry() {
+//        guard !self.searchText.isEmpty else {
+//            return
+//        }
+//    }
 }

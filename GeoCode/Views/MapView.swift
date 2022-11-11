@@ -26,6 +26,7 @@ struct MapView: View {
             .ignoresSafeArea()
             
             VStack (spacing: 0) {
+                SearchBarView(searchText: $mv.searchText)
                 Spacer()
                 countriesPreview
                     .shadow(color: Color.black.opacity(0.3), radius: 20)
