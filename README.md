@@ -4,9 +4,7 @@ GeoCode is an iOS mobile app developed to view all of the countries and display 
 
 One of the challenges that I have encountered is fetching data from the API endpoint using Swift. I learned that there are different ways of fetching data asynchronously such as Closure, Combine, and Async/Await. I implemented my fetch data through the Combine library, but got stuck due to lack of knowledge of concurrency and use of Swift pipeline. I did more research and was able to implement a simpler way using Async/Await. Another problem that I encountered is by creating a model based off the JSON response. This is something new since I am used to just parsing through the JSON response. However, you have to create a Model that conforms to the JSON response which should also be Codable protocol.
 
-{Provide a link to your YouTube demonstration.  It should be a 4-5 minute demo of the software running and a walkthrough of the code.}
-
-[Software Demo Video](http://youtube.link.goes.here)
+[Dev Log #1](https://youtu.be/8tWJo--b5to)
 
 # Development Environment
 
